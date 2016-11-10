@@ -11,6 +11,7 @@ CREATE TABLE puppies (
 
 COPY puppies (name, url)
 -- UPDATE THIS PATH WITH YOUR OWN!
-FROM '/Users/rafacode/Desktop/practiceTechnologies/MEAN/puppies_v2/db/puppies.csv' with (format csv, delimiter ',');
+FROM
+'/Users/admin/code/wdi/labs/puppiesapi/db/puppies.csv' with (format csv, delimiter ',');
 
 COMMIT;

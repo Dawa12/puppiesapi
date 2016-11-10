@@ -13,12 +13,29 @@ function adoptPuppy(payload) {
   });
 }
 
-function likePuppy() {
+function likePuppy(e) {
+  let id = parseInt(e.target.id);
+  console.log(id);
   // Implement liking a puppy here.
+  return fetch(`/api/puppies/${id}`, {
+    headers: {
+      'Content-type': 'application/json'
+    },
+    method: 'PUT',
+  });
 }
 
 function abandonPuppy() {
   // Implement abandoning a puppy here :(
+
+  let id = parseInt(e.target.id);
+  // Implement liking a puppy here.
+  return fetch(`/api/puppies/${id}`, {
+    headers: {
+      'Content-type': 'application/json'
+    },
+    method: 'DELETE',
+  });
 }
 
 
@@ -43,6 +60,17 @@ function renderPuppies(puppies) {
       .attr('src', puppies[i].url);
 
     // You should add a button for liking here
+    // thanks to Taka!
+    const $newButton = $('<button>').text('like');
+    $newButton.attr('id', puppies[i].id);
+    $newButton.on('click', likePuppy);
+
+    const $deleteButton = $('<button>').text('Abandon!');
+    $deleteButton.attr('id', puppies[i].id);
+    $deleteButton.on('click', abandonPuppy);
+
+    $newPuppy.append($newButton);
+    $newPuppy.append($deleteButton);
 
     // you should add a button for abandoning here
 
@@ -71,6 +99,7 @@ function registerFormHandler() {
     adoptPuppy(puppy).then(() => {
       getAllPuppies().then(renderPuppies);
     });
+
   });
 }
 
