@@ -1,4 +1,5 @@
 function getAllPuppies() {
+  console.log('getting puppies');
   return fetch('/api/puppies')
     .then(r => r.json());
 }
@@ -38,7 +39,6 @@ function abandonPuppy() {
   });
 }
 
-
 function renderPuppies(puppies) {
   const $container = $('.adopted-puppies').empty();
   for (let i = 0; i < puppies.length; i += 1) {
@@ -64,13 +64,19 @@ function renderPuppies(puppies) {
     const $newButton = $('<button>').text('like');
     $newButton.attr('id', puppies[i].id);
     $newButton.on('click', likePuppy);
+    //   likePuppy;
+    // });
+    //
+    // adoptPuppy(puppy).then(() => {
+    //   getAllPuppies().then(renderPuppies);
+    // });
 
     const $deleteButton = $('<button>').text('Abandon!');
     $deleteButton.attr('id', puppies[i].id);
     $deleteButton.on('click', abandonPuppy);
 
-    $newPuppy.append($newButton);
     $newPuppy.append($deleteButton);
+    $newPuppy.append($newButton);
 
     // you should add a button for abandoning here
 
@@ -99,14 +105,13 @@ function registerFormHandler() {
     adoptPuppy(puppy).then(() => {
       getAllPuppies().then(renderPuppies);
     });
-
   });
 }
 
-
 $(() => {
+  console.log('runnning script.js');
   registerFormHandler();
-  registerLikeButtonHandler();
-  registerAbandonButtonHandler();
+  // registerLikeButtonHandler();
+  // registerAbandonButtonHandler();
   getAllPuppies().then(renderPuppies);
 });

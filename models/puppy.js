@@ -1,7 +1,6 @@
 const db = require('../lib/dbConnect');
 
 function getAllPuppies(req, res, next) {
-
   db.any('SELECT * from puppies;')
     .then((puppies) => {
       res.puppies = puppies;
